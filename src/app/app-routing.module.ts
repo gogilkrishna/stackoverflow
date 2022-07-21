@@ -4,8 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'questions',
-    loadChildren: () => import('../question-search/question-search.module').then(m => m.QuestionSearchModule)
+    loadChildren: () => import('../question-search/questions.module').then(m => m.QuestionsModule)
+  },
+  {
+    path: '**', redirectTo: 'questions'
   }
+
 ];
 
 @NgModule({

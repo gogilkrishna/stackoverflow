@@ -1,5 +1,4 @@
 .search{
-  //position: relative;
   top:10px;
   display: flex;
   width: 100%;
@@ -13,23 +12,38 @@
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-.example-sidenav-content {
+.sidenav-content {
   display: flex;
-  height: 100%;
-  align-items: center;
+  height: auto;
+  position: relative;
+  padding-top: 30px;
+
+   .toolbar {
+     position: fixed;
+     z-index: 11;
+     top: 0px;
+   }
 }
 .mat-raised-button{
   position: fixed;
   top:10px;
-  margin-right: 1px;
-
+  //margin-right: 10px;
 }
 
 .example-sidenav {
   padding: 20px;
 
 }
+.table {
+  //max-width: 400px;
+  padding: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
 
+.mat-toolbar-row{
+  flex: 1 1 auto;
+}
 
 .paginator{
   position: fixed;

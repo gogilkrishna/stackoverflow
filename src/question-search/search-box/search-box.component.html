@@ -1,83 +1,63 @@
-<mat-label>Date</mat-label><p>
-  <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>From Date</mat-label>
-    <mat-date-range-input
-      [formGroup]="campaignOne"
-      [rangePicker]="campaignOnePicker"
-      [comparisonStart]="campaignTwo.value.start"
-      [comparisonEnd]="campaignTwo.value.end">
-      <input matStartDate placeholder="Start date" formControlName="start">
-      <input matEndDate placeholder="End date" formControlName="end">
-    </mat-date-range-input>
-    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
-    <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
-  </mat-form-field>
-  <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>To Date</mat-label>
-    <mat-date-range-input
-      [formGroup]="campaignTwo"
-      [rangePicker]="campaignTwoPicker"
-      [comparisonStart]="campaignOne.value.start"
-      [comparisonEnd]="campaignOne.value.end">
-      <input matStartDate placeholder="Start date" formControlName="start">
-      <input matEndDate placeholder="End date" formControlName="end">
-    </mat-date-range-input>
-    <mat-datepicker-toggle matSuffix [for]="campaignTwoPicker"></mat-datepicker-toggle>
-    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-    <mat-date-range-picker #campaignTwoPicker></mat-date-range-picker>
-  </mat-form-field>
+<form [formGroup]="form">
+  <div class="Date"  formGroupName="campaignOne">
+     <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>Date</mat-label>
+        <mat-date-range-input
+          [rangePicker]="campaignOnePicker">
+          <input matStartDate formControlName="fromdate" placeholder="Start date">
+          <input matEndDate formControlName="todate" placeholder="End date">
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+      <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+    </mat-form-field>
+  </div>
 
-  <br>
-  <mat-form-field appearance="fill">
-    <mat-label>Choose an option</mat-label>
-    <select matNativeControl [disabled]="disableSelect.value">
-      <option value="" selected></option>
-      <option value="activity">activity</option>
-      <option value="votes">votes</option>
-      <option value="creation">creation</option>
-      <option value="hot" >hot</option>
-      <option value="week">week</option>
-      <option value="month" >month</option>
-    </select>
+  <div class="order">
+    <mat-form-field appearance="fill">
+      <mat-label>Choose an order</mat-label>
+      <select matNativeControl formControlName="sortOrder">
+        <option value="" selected></option>
+        <option value="asc">asc</option>
+        <option value="desc" >desc</option>
+      </select>
+    </mat-form-field>
+  </div>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Tags</mat-label>
+    <input matInput formControlName="tag" >
   </mat-form-field>
+  <div class="sort">
+    <mat-form-field class="example-form-field" appearance="fill">
+          <mat-label> Date</mat-label>
+        <mat-date-range-input
+             formGroupName="sortDate"
+             [rangePicker]="DatePicker">
+              <input matStartDate
+                     placeholder="Start date" formControlName="min">
+              <input matEndDate
+                     placeholder="End date" formControlName="max"  >
+            </mat-date-range-input>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="DatePicker"></mat-datepicker-toggle>
+          <mat-date-range-picker #DatePicker></mat-date-range-picker>
+    </mat-form-field>
+  </div>
 
-  <mat-label> Sort</mat-label><p>
-  <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>Min Date</mat-label>
-    <mat-date-range-input
-      [formGroup]="maxDate"
-      [rangePicker]="minDatePicker"
-      [comparisonStart]="minDate.value.start"
-      [comparisonEnd]="minDate.value.end">
-      <input matStartDate placeholder="Start date" formControlName="start">
-      <input matEndDate placeholder="End date" formControlName="end">
-    </mat-date-range-input>
-    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matSuffix [for]="minDatePicker"></mat-datepicker-toggle>
-    <mat-date-range-picker #minDatePicker></mat-date-range-picker>
-  </mat-form-field>
+  <div class="sortList" >
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a value</mat-label>
+        <select matNativeControl formControlName="sortBy">
+          <option value="" ></option>
+          <option value="activity" >activity</option>
+          <option value="votes">votes</option>
+          <option value="creation">creation</option>
+          <option value="hot" >hot</option>
+          <option value="week">week</option>
+          <option value="month" >month</option>
+        </select>
+    </mat-form-field>
+  </div>
 
-  <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>Max Date</mat-label>
-    <mat-date-range-input
-      [formGroup]="minDate"
-      [rangePicker]="maxDatePicker"
-      [comparisonStart]="maxDate.value.start"
-      [comparisonEnd]="maxDate.value.end">
-      <input matStartDate placeholder="Start date" formControlName="start">
-      <input matEndDate placeholder="End date" formControlName="end">
-    </mat-date-range-input>
-    <mat-datepicker-toggle matSuffix [for]="maxDatePicker"></mat-datepicker-toggle>
-    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-    <mat-date-range-picker #maxDatePicker></mat-date-range-picker>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="fill">
-    <mat-label>Choose an option</mat-label>
-    <select matNativeControl [disabled]="disableSelect.value">
-      <option value="" selected></option>
-      <option value="asc">asc</option>
-      <option value="desc" >desc</option>
-    </select>
-  </mat-form-field>
+</form>
+
