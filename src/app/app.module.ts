@@ -26,8 +26,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     MatFormFieldModule,
     MatNativeDateModule,
     HttpClientModule,
-    FlexLayoutModule
-
+    FlexLayoutModule,
   ],
   providers: [
     {

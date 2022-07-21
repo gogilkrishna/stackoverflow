@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {keyframes} from "@angular/animations";
 
 const today = new Date();
 const month = today.getMonth();
@@ -12,29 +13,49 @@ const year = today.getFullYear();
 })
 export class SearchBoxComponent implements OnInit {
 
-  showFiller = false;
-  disableSelect = new FormControl(false);
+  @Output() public searchEvent = new EventEmitter();
 
-  campaignOne = new FormGroup({
-    start: new FormControl(new Date(year, month, 13)),
-    end: new FormControl(new Date(year, month, 16)),
-  });
-  campaignTwo = new FormGroup({
-    start: new FormControl(new Date(year, month, 15)),
-    end: new FormControl(new Date(year, month, 19)),
-  });
+  form!: FormGroup;
 
-  maxDate = new FormGroup({
-    start: new FormControl(new Date(year, month, 13)),
-    end: new FormControl(new Date(year, month, 16)),
-  });
-  minDate = new FormGroup({
-    start: new FormControl(new Date(year, month, 15)),
-    end: new FormControl(new Date(year, month, 19)),
-  });
-  constructor() { }
+  constructor(public fb: FormBuilder) {
+    this.form = this.fb.group({
+      campaignOne: this.fb.group({
+        fromdate: [new Date()],
+        todate: [new Date()],
+      }),
+
+      sortDate:this.fb.group({
+        min: [new Date()],
+        max: [new Date()],
+      }),
+      sortOrder: ['asc'],
+      tag: [],
+
+      sortBy: ['activity'],
+    })
+
+    this.form.valueChanges.subscribe(res => {
+      const sortby = res.sortBy;
+      if(['activity' ,'creation' ].includes(sortby)) {
+        this.form.get('sortDate')?.enable({emitEvent: false, onlySelf: true});
+      } else {
+        this.form.get('sortDate')?.disable({emitEvent: false, onlySelf: true}  );
+      }
+       this.searchEvent.emit({
+        fromdate: new Date(this.form.get('campaignOne')?.value.fromdate).getTime(),
+        todate: new Date(this.form.get('campaignOne')?.value.todate).getTime(),
+        min: new Date(this.form.get('sortDate')?.value.min).getTime(),
+        max: new Date(this.form.get('sortDate')?.value.max).getTime(),
+        sortOrder: this.form.value.sortOrder,
+        tag: this.form.value.tag,
+        sort:this.form.value.sort
+      })
+    });
+   }
+
 
   ngOnInit(): void {
   }
+
 
 }

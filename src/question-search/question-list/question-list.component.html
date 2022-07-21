@@ -1,0 +1,42 @@
+
+  <mat-drawer-container class="example-container" autosize>
+
+    <mat-drawer #drawer class="example-sidenav" mode="over">
+    <app-search-box (searchEvent)="questionSearch($event)"></app-search-box>
+    </mat-drawer>
+
+    <div class="sidenav-content">
+      <mat-toolbar class="toolbar" color="primary">
+        <button type="button" mat-raised-button (click)="drawer.toggle()">
+          Search
+        </button>
+      </mat-toolbar>
+
+      <div fxLayout="column" fxLayoutAlign="space-around stretch" >
+        <div class="table " *ngFor="let question of questionArray">
+          <mat-card>
+            <mat-card-content>
+              {{question.title|json}}
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+      <div  class=paginator>
+        <mat-paginator [length]="this.pageLength"
+                       [pageSize]="pageSize"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="handlePageEvent($event)"
+                       aria-label="Select page">
+        </mat-paginator>
+      </div>
+
+    </div>
+
+
+  </mat-drawer-container>
+
+
+
+
+
+
